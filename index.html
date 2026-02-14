@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Your Smile ❤️</title>
+
+<style>
+
+body{
+margin:0;
+background:black;
+color:white;
+font-family:Segoe UI;
+overflow:hidden;
+}
+
+/* Intro */
+
+#intro{
+position:fixed;
+width:100%;
+height:100%;
+display:flex;
+flex-direction:column;
+justify-content:center;
+align-items:center;
+text-align:center;
+background:black;
+z-index:10;
+}
+
+button{
+padding:15px 30px;
+font-size:18px;
+border:none;
+border-radius:30px;
+background:#ff2e63;
+color:white;
+box-shadow:0 0 20px #ff2e63;
+}
+
+/* Video */
+
+#video{
+position:fixed;
+width:100%;
+height:100%;
+object-fit:cover;
+display:none;
+}
+
+/* Overlay text */
+
+#overlay{
+position:fixed;
+bottom:20%;
+width:100%;
+text-align:center;
+font-size:24px;
+opacity:0;
+transition:2s;
+text-shadow:0 0 20px black;
+padding:20px;
+}
+
+/* Final message */
+
+#final{
+position:fixed;
+top:50%;
+left:50%;
+transform:translate(-50%,-50%);
+text-align:center;
+font-size:28px;
+opacity:0;
+transition:3s;
+text-shadow:0 0 30px #ff2e63;
+padding:20px;
+}
+
+/* Floating hearts */
+
+.heart{
+position:fixed;
+color:#ff2e63;
+animation:float 6s linear infinite;
+opacity:0.7;
+}
+
+@keyframes float{
+from{
+transform:translateY(100vh);
+opacity:0;
+}
+to{
+transform:translateY(-10vh);
+opacity:1;
+}
+}
+
+</style>
+</head>
+<body>
+
+
+<!-- Intro -->
+
+<div id="intro">
+
+<div style="font-size:24px;margin-bottom:30px;">
+There is something I noticed...<br/>The way you are happy with me. The reaction says all
+</div>
+
+<button onclick="start()">See it ❤️</button>
+
+</div>
+
+
+<!-- Video -->
+
+<video id="video" playsinline>
+<source src="reaction.mp4" type="video/mp4">
+</video>
+
+
+<div id="overlay"></div>
+
+
+<div id="final">
+If being with me makes you this happy...<br><br>
+I promise I will spend my life protecting that smile.<br><br>
+Because your happiness is my home. ❤️
+</div>
+
+
+<script>
+
+const intro = document.getElementById("intro");
+const video = document.getElementById("video");
+const overlay = document.getElementById("overlay");
+const finalMsg = document.getElementById("final");
+
+
+function start(){
+
+intro.style.display="none";
+
+video.style.display="block";
+
+video.muted=true;
+
+video.play();
+
+/* Enable sound on tap */
+document.addEventListener("click", ()=>{
+video.muted=false;
+},{ once:true });
+
+showTexts();
+
+}
+
+
+/* Emotional text timing */
+
+function showTexts(){
+
+setTimeout(()=>show("This smile..."),4000);
+
+setTimeout(()=>show("This happiness..."),12000);
+
+setTimeout(()=>show("This peace on your face..."),20000);
+
+setTimeout(()=>show("This is everything to me."),30000);
+
+setTimeout(()=>show("I'm happy when i see smile on your face"),50000);
+setTimeout(()=>show("You means a lott"),60000);
+setTimeout(()=>show("You are the world"),70000);
+setTimeout(()=>show("Always be happy"),90000);
+
+}
+
+
+/* Show overlay */
+
+function show(text){
+
+overlay.innerText=text;
+
+overlay.style.opacity=1;
+
+setTimeout(()=>{
+overlay.style.opacity=0;
+},4000);
+
+}
+
+
+/* When video ends */
+
+video.onended=function(){
+
+finalMsg.style.opacity=1;
+
+createHearts();
+
+};
+
+
+/* Floating hearts */
+
+function createHearts(){
+
+setInterval(()=>{
+
+let heart=document.createElement("div");
+
+heart.className="heart";
+
+heart.innerHTML="❤️";
+
+heart.style.left=Math.random()*100+"vw";
+
+heart.style.fontSize=(20+Math.random()*20)+"px";
+
+document.body.appendChild(heart);
+
+setTimeout(()=>heart.remove(),6000);
+
+},300);
+
+}
+
+</script>
+
+</body>
+</html>
